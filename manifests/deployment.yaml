@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-guestbook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-guestbook
+  template:
+    metadata:
+      labels:
+        app: php-guestbook
+    spec:
+      containers:
+        - name: php-guestbook
+          image: php:8.2-apache
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+      volumes:
+        - name: app-code
+          gitRepo:
+            repository: "https://github.com/zeshaq/php-guestbook.git"
+            revision: "main"
+

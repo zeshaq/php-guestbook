@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: php-guestbook
+spec:
+  to:
+    kind: Service
+    name: php-guestbook
+  port:
+    targetPort: 80
+
